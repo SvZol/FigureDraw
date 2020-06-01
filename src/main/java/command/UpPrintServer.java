@@ -1,27 +1,21 @@
 package command;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class UpPrintServer {
-    static ServerSocket ss;
     static String ip = "localhost";
-    static String string;
+    static ServerSocket ss;
+
+
+
 
     public static void go(String str) throws Throwable {
-        string = str;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        //System.err.println("Client accepted");
         ss = new ServerSocket(9087, 0, InetAddress.getByName(ip));
-        while(true) {
-            Socket s = ss.accept();
-            //System.err.println("Client accepted");
-            new Thread(new SocketProcessor(s)).start();
-        }
+        new Thread(new SocketProcessor(str)).start();
     }
 
     private static class SocketProcessor implements Runnable {
@@ -29,17 +23,19 @@ public class UpPrintServer {
         private Socket s;
         private InputStream is;
         private OutputStream os;
+        private String str;
 
-        private SocketProcessor(Socket s) throws Throwable {
-            this.s = s;
+        private SocketProcessor(String str) throws Throwable {
+            this.s = ss.accept();
             this.is = s.getInputStream();
             this.os = s.getOutputStream();
+            this.str = str;
         }
 
         public void run() {
             try {
                 readInputHeaders();
-                writeResponse(string);
+                writeResponse(str);
             } catch (Throwable t) {
             }
             //System.err.println("Client processing finished");
@@ -55,6 +51,8 @@ public class UpPrintServer {
             String result = response + s;
             os.write(result.getBytes());
             os.flush();
+            this.s.close();
+            ss.close();
         }
 
         private void readInputHeaders() throws Throwable {

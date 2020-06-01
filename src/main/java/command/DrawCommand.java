@@ -7,7 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DrawCommand implements Command{
+    HelloCommand  helloCommand;
 
+    public DrawCommand(HelloCommand helloCommand) {
+        this.helloCommand = helloCommand;
+    }
 
     @Override
     public void execution() throws Throwable {
@@ -15,7 +19,7 @@ public class DrawCommand implements Command{
             colorMap.put(Color.RED, "#800000;");
             colorMap.put(Color.BLUE, "#0000FF;");
             colorMap.put(Color.GREEN, "#008000;");
-        String color =  colorMap.get(CommandExecuter.helloCommand.getColor());
+        String color =  colorMap.get(helloCommand.getColor());
         String squareHtmlCod = "<head>\n" +
                 "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" +
                 "<style>\n" +
@@ -65,8 +69,8 @@ public class DrawCommand implements Command{
             figureMap.put(Figure.SQUARE, squareHtmlCod);
             figureMap.put(Figure.CIRCLE, circleHtmlCod);
         String res = "<html>";
-        for(int j = 0; j < CommandExecuter.helloCommand.getCount(); j++){
-            res += figureMap.get(CommandExecuter.helloCommand.getFigure());
+        for(int j = 0; j < helloCommand.getCount(); j++){
+            res += figureMap.get(helloCommand.getFigure());
         }
         res += "</html>";
         UpPrintServer.go(res);
