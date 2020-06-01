@@ -1,5 +1,5 @@
 package command;
 
 public interface Command {
-    void execution();
+    void execution() throws Throwable;
 }

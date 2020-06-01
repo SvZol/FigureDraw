@@ -5,8 +5,8 @@ import figure.Figure;
 
 
 public class HelloCommand implements Command {
-    private Figure figure;
-    private Color color;
+    private static Figure figure;
+    private static Color color;
     private int count;
 
     public HelloCommand() {
@@ -34,7 +34,7 @@ public class HelloCommand implements Command {
             ConsoleHelper.write("Такого цвета нет. Поробуй ещё раз!");
             j = ConsoleHelper.readInt();
         }
-        this.color = Color.whatColor(j);
+        color = Color.whatColor(j);
         ConsoleHelper.write("хорошо. А сколько их надо?");
         this.count = ConsoleHelper.readInt();
     }

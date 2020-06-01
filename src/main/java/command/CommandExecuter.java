@@ -1,9 +1,10 @@
 package command;
 
 public class CommandExecuter{
-    public static void execution() {
-        HelloCommand helloCommand = new HelloCommand();
+    static HelloCommand helloCommand = new HelloCommand();
+    static DrawCommand drawCommand = new DrawCommand();
+    public static void execution() throws Throwable {
         helloCommand.execution();
-        ConsoleHelper.write(helloCommand.getFigure().toString() + " " + helloCommand.getColor().toString() + " " + helloCommand.getCount());
+        drawCommand.execution();
     }
 }
