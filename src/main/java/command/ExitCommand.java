@@ -1,5 +1,8 @@
 package command;
 
+/**
+ * Класс прощающийся с пользователем. Вызывается про вводе пользователем "exit"
+ */
 public class ExitCommand implements Command{
     @Override
     public void execution() {

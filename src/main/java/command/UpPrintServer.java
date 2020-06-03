@@ -5,11 +5,15 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * Класс, передающий строку на страницу http:localhost:9087
+ * @autor Svetlana Zolotareva
+ */
 public class UpPrintServer {
+    /**поле ip - адрес*/
     static String ip = "localhost";
+    /**Поле serverSocket*/
     static ServerSocket ss;
-
-
 
 
     public static void go(String str) throws Throwable {
@@ -51,7 +55,6 @@ public class UpPrintServer {
             String result = response + s;
             os.write(result.getBytes());
             os.flush();
-            this.s.close();
             ss.close();
         }
 

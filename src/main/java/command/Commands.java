@@ -1,13 +1,11 @@
 package command;
 
-import Exseption.WrongDataExseption;
-
 public enum Commands {
 
     HELLO,
     DRAW,
     EXIT;
-    public Commands takeCommand(int i) throws WrongDataExseption {
+    public Commands takeCommand(int i){
         if(i > 0 && i <= Commands.values().length) {
             return Commands.values()[i - 1];
         }

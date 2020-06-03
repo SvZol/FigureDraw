@@ -3,10 +3,16 @@ package command;
 import figure.Color;
 import figure.Figure;
 
-
+/**
+ * Класс получаюций от пользователя информацию о виде фигур их цвете и колиестве.
+ * @autor Svetlana Zolotareva
+ */
 public class HelloCommand implements Command {
+    /**Поле тип фигуры*/
     private static Figure figure;
+    /**Поле тип цвет фигуры*/
     private static Color color;
+    /**Поле тип количество фигур*/
     private int count;
 
     public HelloCommand() {
